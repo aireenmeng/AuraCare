@@ -41,9 +41,9 @@
                                         {{ $service->duration_minutes }} mins
                                     </div>
                                     
-                                    <a href="#" class="text-sm font-semibold text-clinic-rose hover:text-clinic-dark transition flex items-center">
-                                        Book This <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                    </a>
+                                    <a href="{{ route('appointments.book', ['service' => $service->id]) }}" class="text-sm font-semibold text-clinic-rose hover:text-clinic-dark transition flex items-center">
+    Book This <svg class="w-4 h-4 ml-1 transform group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+</a>
                                 </div>
                             </div>
                         @endforeach

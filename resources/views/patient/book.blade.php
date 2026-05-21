@@ -27,9 +27,9 @@
                             <select name="service_id" class="w-full rounded-xl border-gray-200 bg-gray-50 shadow-sm focus:border-clinic-rose focus:ring focus:ring-clinic-blush focus:ring-opacity-50 py-3 transition" required>
                                 <option value="" disabled selected>Select from our catalog...</option>
                                 @foreach($services as $service)
-                                    <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
-                                        {{ $service->service_name }} (₱{{ number_format($service->price, 2) }} - {{ $service->duration_minutes }} mins)
-                                    </option>
+                                    <option value="{{ $service->id }}" {{ old('service_id', request('service')) == $service->id ? 'selected' : '' }}>
+                                    {{ $service->service_name }} (₱{{ number_format($service->price, 2) }} - {{ $service->duration_minutes }} mins)
+                                </option>
                                 @endforeach
                             </select>
                             @error('service_id') <span class="text-red-500 text-xs mt-1">{{ $message }}</span> @enderror
