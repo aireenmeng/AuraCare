@@ -61,4 +61,13 @@ class PatientRecordController extends Controller
 
         return back()->with('success', 'Treatment record and photo successfully saved to patient file!');
     }
+
+    public function services()
+    {
+        // Fetch only active services and group them by category
+        $servicesByCategory = Service::all()->groupBy('category');
+        
+        // Point to the new public view!
+        return view('public.services', compact('servicesByCategory'));
+    }
 }

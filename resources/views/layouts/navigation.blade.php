@@ -13,7 +13,7 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    @if(Auth::user()->role === 'admin')
+                    @if(Auth::user()?->role === 'admin')
                         <x-nav-link :href="route('appointments.index')" :active="request()->is('appointments*')">
                             {{ __('Appointments') }}
                         </x-nav-link>
@@ -42,7 +42,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-clinic-rose focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }} <span class="text-xs text-clinic-rose font-bold ml-1">({{ ucfirst(Auth::user()->role) }})</span></div>
+                            <div>{{ Auth::user()?->name }} <span class="text-xs text-clinic-rose font-bold ml-1">({{ ucfirst(Auth::user()?->role) }})</span></div>
 
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

@@ -1,19 +1,53 @@
-<x-app-layout>
-    <x-slot name="header">
-        <div class="text-center py-6">
-            <h2 class="font-serif font-bold text-4xl text-gray-900 leading-tight mb-3">
-                Our Signature <span class="text-clinic-rose italic">Treatments</span>
-            </h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">Discover our range of advanced aesthetic procedures designed to bring out your natural radiance.</p>
-        </div>
-    </x-slot>
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Our Services | AuraCare</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <div class="py-8 pb-20">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-[#FAFAFA] font-sans text-clinic-text antialiased selection:bg-clinic-rose selection:text-white">
+
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm py-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="{{ url('/') }}" class="font-serif text-2xl font-bold text-clinic-rose hover:text-clinic-dark transition">AuraCare.</a>
+            </div>
+            <div class="space-x-6 text-sm font-medium flex items-center">
+                <a href="{{ route('patient.services') }}" class="text-clinic-rose font-semibold">Services</a>
+                
+                @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-clinic-dark font-semibold">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-gray-500 hover:text-clinic-rose transition">Log in</a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="bg-clinic-rose hover:bg-clinic-dark text-white px-5 py-2 rounded-full transition shadow-sm">Sign Up</a>
+                        @endif
+                    @endauth
+                @endif
+            </div>
+        </div>
+    </nav>
+
+    <main class="py-16 pb-24">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
+            <div class="text-center mb-16">
+                <h2 class="font-serif font-bold text-4xl text-gray-900 leading-tight mb-3">
+                    Our Signature <span class="text-clinic-rose italic">Treatments</span>
+                </h2>
+                <p class="text-gray-500 max-w-2xl mx-auto">Discover our range of advanced aesthetic procedures designed to bring out your natural radiance.</p>
+            </div>
+            
             @forelse($servicesByCategory as $category => $services)
-                <div class="mb-12">
-                    <div class="flex items-center mb-6">
+                <div class="mb-16">
+                    <div class="flex items-center mb-8">
                         <h3 class="font-serif text-2xl font-semibold text-clinic-dark">{{ $category }}</h3>
                         <div class="flex-grow h-px bg-clinic-rose/20 ml-4"></div>
                     </div>
@@ -50,15 +84,14 @@
                     </div>
                 </div>
             @empty
-                <div class="text-center py-20">
-                    <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-clinic-light text-clinic-rose mb-4">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-                    </div>
+                <div class="text-center py-20 bg-white rounded-3xl border border-gray-100 shadow-sm">
                     <h3 class="text-xl font-serif text-gray-900 mb-2">Check back soon!</h3>
                     <p class="text-gray-500">Our medical team is currently updating the service catalog.</p>
                 </div>
             @endforelse
 
         </div>
-    </div>
-</x-app-layout>
+    </main>
+
+</body>
+</html>
